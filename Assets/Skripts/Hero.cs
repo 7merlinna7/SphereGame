@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Hero : MonoBehaviour
 {
-    private static int _rightSideRotation = 1;
-    private static int _leftSideRotation = -1;
+    private const int _rightSideRotation = 1;
+    private const int _leftSideRotation = -1;
 
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private float _speed;
@@ -18,35 +16,41 @@ public class Hero : MonoBehaviour
     private bool _isRightRorationKeyPressed;
     private bool _isLeftRorationKeyPressed;
 
-    public int GemScore { get;private set; }
+    public void StopHero() => _rigidbody.isKinematic = true;
 
-    public void AddGem(int value)
+    public void StartHero()
     {
-        GemScore += value;
-        Debug.Log(GemScore);
+        _rigidbody.isKinematic = false;
+        _rigidbody.velocity = Vector3.zero;
+        transform.position = Vector3.zero;
+        transform.rotation = Quaternion.identity;
     }
 
     private void Awake()
     {
-
+        StartHero();
     }
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.W))
-            _isMoveForwardKeyPressed = true;
+        if (_rigidbody.isKinematic == false)
+        {
 
-        if (Input.GetKey(KeyCode.S))
-            _isMoveBackKeyPressed = true;
+            if (Input.GetKey(KeyCode.W))
+                _isMoveForwardKeyPressed = true;
 
-        if (Input.GetKeyDown(KeyCode.Space))
-            _isJumpKeyPressed = true;
+            if (Input.GetKey(KeyCode.S))
+                _isMoveBackKeyPressed = true;
 
-        if (Input.GetKey(KeyCode.A))
-            _isLeftRorationKeyPressed = true;
+            if (Input.GetKeyDown(KeyCode.Space))
+                _isJumpKeyPressed = true;
 
-        if (Input.GetKey(KeyCode.D))
-            _isRightRorationKeyPressed = true;
+            if (Input.GetKey(KeyCode.A))
+                _isLeftRorationKeyPressed = true;
+
+            if (Input.GetKey(KeyCode.D))
+                _isRightRorationKeyPressed = true;
+        }
     }
 
     private void FixedUpdate()

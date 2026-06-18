@@ -2,31 +2,27 @@ using UnityEngine;
 
 public class TargetFollower : MonoBehaviour
 {
-    [SerializeField] private Transform _target;
-    [SerializeField] private Vector3 _offset;
-    [SerializeField] private Vector3 _floorOffset;
-    [SerializeField] private Vector3 _floorRotate;
+    [SerializeField] private Vector3 _followPosition;
+    [SerializeField] private Vector3 _followCameraRotation;
+    [SerializeField] private Vector3 _floorCameraPosition;
+    [SerializeField] private Vector3 _floorCameraRotation;
     [SerializeField] private FloorStayCheck _floorStayCheck;
 
     private bool _isOnFloor;
 
-
     private void Update()
     {
-        _isOnFloor = _floorStayCheck.IsOnFloor; //не берет значение, у свойства выяснить поч
-        Debug.Log(_isOnFloor);
-    }
+        _isOnFloor = _floorStayCheck.IsOnFloor;
 
-    private void LateUpdate()
-    {
         if (_isOnFloor)
         {
-            transform.position = _target.position + _floorOffset;
-            transform.rotation = Quaternion.Euler(_floorRotate);
+            transform.localPosition = _floorCameraPosition;
+            transform.localRotation = Quaternion.Euler(_floorCameraRotation);
         }
         else
         {
-            transform.position = _target.position + _offset;
+            transform.localPosition = _followPosition;
+            transform.localRotation = Quaternion.Euler(_followCameraRotation);
         }
     }
 }
