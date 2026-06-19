@@ -7,13 +7,8 @@ public class Gem : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void CollectGem()
     {
-        GemCollector gemCollector = other.GetComponent<GemCollector>();
-        if (gemCollector != null)
-        {
-            gemCollector.AddGem();
-            gameObject.SetActive(false);
-        }
+        gameObject.SetActive(false);
     }
 }
