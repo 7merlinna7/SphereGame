@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GemWallet : MonoBehaviour
+public class GemCollector : MonoBehaviour
 {
     public int GemScore { get; private set; }
 

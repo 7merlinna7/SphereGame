@@ -13,7 +13,7 @@ public class GameLogic : MonoBehaviour
     [SerializeField] private TMP_Text _gameScoreText;
     [SerializeField] private List<Gem> _gems;
     [SerializeField] private Hero _hero;
-    [SerializeField] private GemWallet _gemCollector;
+    [SerializeField] private GemCollector _gemCollector;
 
     private int _gameScore;
     private float _gameTimer;
